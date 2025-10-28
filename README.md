@@ -1,73 +1,188 @@
-# Welcome to your Lovable project
+# TicketFlow - Ticket Management Web App
 
-## Project info
+A modern, responsive ticket management system built with React, TypeScript, and TailwindCSS.
 
-**URL**: https://lovable.dev/projects/9895ce0a-e0f2-47c0-af30-c5809601c911
+## 🚀 Technologies Used
 
-## How can I edit this code?
+- **React 18** - UI library
+- **Vite** - Build tool and dev server
+- **TypeScript** - Type safety
+- **TailwindCSS** - Styling and responsive design
+- **React Router** - Client-side routing
+- **shadcn/ui** - UI component library
+- **Lucide React** - Icon library
+- **Sonner** - Toast notifications
 
-There are several ways of editing your application.
+## 📋 Features
 
-**Use Lovable**
+- **Landing Page** - Beautiful hero section with wavy background and decorative elements
+- **Authentication** - Login and signup with localStorage-based mock authentication
+- **Dashboard** - Overview with summary cards for tickets
+- **Ticket Management** - Full CRUD operations (Create, Read, Update, Delete)
+- **Protected Routes** - Session-based route protection
+- **Responsive Design** - Mobile-first design with max-width 1440px
+- **Toast Notifications** - User feedback for all actions
+- **Form Validation** - Client-side validation with inline error messages
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/9895ce0a-e0f2-47c0-af30-c5809601c911) and start prompting.
+## 🎨 Design Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- Semantic HTML with accessibility labels
+- Consistent color palette with status-based badges
+- Smooth transitions and hover effects
+- Decorative circular elements
+- Card-based layouts with shadows and rounded corners
+- Wavy SVG background in hero section
 
-**Use your preferred IDE**
+## 🛠️ Setup & Installation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js (v16 or higher)
+- npm or yarn
 
-Follow these steps:
+### Installation Steps
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd ticketflow
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to:
+```
+http://localhost:8080
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📱 Routes
 
-**Use GitHub Codespaces**
+- `/` - Landing page
+- `/auth/login` - Login page
+- `/auth/signup` - Signup page
+- `/dashboard` - Dashboard (protected)
+- `/tickets` - Ticket management (protected)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🔐 Authentication
 
-## What technologies are used for this project?
+The app uses localStorage for mock authentication:
 
-This project is built with:
+- **Session Key**: `ticketapp_session`
+- **Users Key**: `ticketapp_users`
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Example User Credentials
 
-## How can I deploy this project?
+Since this is a mock system, you can create any account through the signup page. Example:
 
-Simply open [Lovable](https://lovable.dev/projects/9895ce0a-e0f2-47c0-af30-c5809601c911) and click on Share -> Publish.
+- Email: demo@ticketflow.com
+- Password: demo123
+- Name: Demo User
 
-## Can I connect a custom domain to my Lovable project?
+## 💾 Data Storage
 
-Yes, you can!
+All data is stored in localStorage:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- **Tickets**: `ticketapp_tickets`
+- **Users**: `ticketapp_users`
+- **Session**: `ticketapp_session`
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### Ticket Structure
+
+```typescript
+{
+  id: number;
+  title: string;
+  description?: string;
+  status: "open" | "in_progress" | "closed";
+  createdAt: string;
+}
+```
+
+## 🎯 Validation Rules
+
+### Authentication
+- Email: Must be valid email format
+- Password: Minimum 6 characters
+- All fields required
+
+### Ticket Management
+- Title: Required, cannot be empty
+- Status: Required, must be one of: open, in_progress, closed
+- Description: Optional, maximum 200 characters
+
+## ♿ Accessibility
+
+- Semantic HTML elements (`<header>`, `<main>`, `<footer>`, `<nav>`)
+- ARIA labels on interactive elements
+- Focus states on all interactive elements
+- Keyboard navigation support
+- High contrast colors for readability
+
+## 🔒 Protected Routes
+
+Routes `/dashboard` and `/tickets` are protected and require authentication. Users without a valid session token are redirected to `/auth/login`.
+
+## 🎨 Status Colors
+
+- **Open** (Green): New tickets requiring attention
+- **In Progress** (Amber): Tickets being worked on
+- **Closed** (Gray): Resolved tickets
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+The production-ready files will be in the `dist` directory.
+
+## 🧪 Code Structure
+
+```
+src/
+├── components/        # Reusable UI components
+│   ├── ui/           # shadcn/ui components
+│   ├── Header.tsx    # App header with navigation
+│   ├── Footer.tsx    # App footer
+│   └── ProtectedRoute.tsx  # Route protection wrapper
+├── contexts/         # React contexts
+│   └── AuthContext.tsx     # Authentication context
+├── pages/            # Page components
+│   ├── Landing.tsx   # Landing page
+│   ├── Login.tsx     # Login page
+│   ├── Signup.tsx    # Signup page
+│   ├── Dashboard.tsx # Dashboard page
+│   └── Tickets.tsx   # Ticket management page
+├── types/            # TypeScript type definitions
+│   └── ticket.ts     # Ticket type definitions
+├── lib/              # Utility functions
+│   └── utils.ts      # Helper functions
+├── App.tsx           # Main app component with routing
+├── main.tsx          # App entry point
+└── index.css         # Global styles and design system
+```
+
+## 📝 Notes
+
+- This is a frontend-only application using localStorage for data persistence
+- No backend or database required
+- Session expires after 24 hours
+- All state management is done using React Context and local state
+- Simple, clean code without over-engineering
+- Minimal use of custom hooks
+
+## 🤝 Contributing
+
+This is a demonstration project for the Frontend Stage 2 Task. Feel free to fork and modify as needed.
+
+## 📄 License
+
+MIT License - feel free to use this project for learning and development purposes.
